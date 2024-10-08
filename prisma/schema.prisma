@@ -1,0 +1,119 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model anuncio_venda {
+  anuncio_venda_id        Int?
+  anuncio_venda_descricao String? @db.VarChar(200)
+  anuncio_venda_dono      String? @db.VarChar(200)
+  anuncio_venda_status    Int?
+
+  @@ignore
+}
+
+model curriculum {
+  curriculum_id       Int    @id @default(autoincrement())
+  curriculum_nome     String @default("0") @db.VarChar(300)
+  curriculum_telefone String @default("0") @db.VarChar(50)
+  curriculum_email    String @default("0") @db.VarChar(50)
+  curriculum_status   Int    @default(0)
+}
+
+model fila_atendimento {
+  fila_atendimento_id     Int      @id @default(autoincrement())
+  fila_atendimento_data   DateTime @db.Date
+  fila_atendimento_status Int      @default(0)
+  paciente_id             Int      @default(0)
+}
+
+model noticia_jornal {
+  noticia_jornal_id        Int       @id @default(autoincrement())
+  noticia_jornal_data      DateTime? @db.Date
+  noticia_jornal_descricao String?   @db.VarChar(300)
+}
+
+model patrocinador_bet {
+  patrocinador_bet_id               Int     @id @default(autoincrement())
+  patrocinador_bet_nome             String? @db.VarChar(50)
+  patrocinador_bet_valor_patrocinio Int?
+  patrocinador_bet_status           Int?
+}
+
+model pet {
+  pet_id     Int    @id @default(autoincrement())
+  pet_nome   String @default("0") @db.VarChar(200)
+  pet_status Int    @default(0)
+}
+
+model produto {
+  produto_id     Int    @id @default(autoincrement())
+  produto_nome   String @default("0") @db.VarChar(200)
+  produto_status Int    @default(0)
+}
+
+model produto_vendido {
+  produto_vendido_id         Int @id @default(autoincrement())
+  produto_vendido_quantidade Int @default(0)
+  produto_id                 Int @default(0)
+}
+
+model reserva_hotel {
+  reserva_hotel_id           Int      @id @default(autoincrement())
+  reserva_hotel_data_entrada DateTime @db.Date
+  reserva_hotel_data_saida   DateTime @db.Date
+  reserva_hotel_status       Int      @default(0)
+}
+
+model saidasvoo {
+  saidasvoo_id      Int       @id @default(autoincrement())
+  saidasvoo_data    DateTime? @db.DateTime(0)
+  saidasvoo_origem  String?   @db.VarChar(50)
+  saidasvoo_destino String?   @db.VarChar(50)
+}
+
+model tarefa {
+  tarefa_id            Int       @id @default(autoincrement())
+  tarefa_descricao     String?   @db.VarChar(300)
+  tarefa_data_postagem DateTime? @db.Date
+  tarefa_data_entrega  DateTime? @db.Date
+  tarefa_nota          Int?
+  tarefa_status        Int?
+}
+
+model terreno_venda {
+  terreno_venda_id          Int    @id @default(autoincrement())
+  terreno_venda_area        Int    @default(0)
+  terreno_venda_preco       Int    @default(0)
+  terreno_venda_localizacao String @default("0") @db.VarChar(50)
+}
+
+model vaga_emprego {
+  vaga_emprego_id          Int      @id @default(autoincrement())
+  vaga_emprego_descricao   String   @default("0") @db.VarChar(300)
+  vaga_emprego_data_inicio DateTime @db.Date
+  vaga_emprego_data_fim    DateTime @db.Date
+  vaga_emprego_status      Int      @default(0)
+}
+
+model veiculo {
+  veiculo_id        Int     @id @default(autoincrement())
+  veiculo_matricula String? @db.VarChar(50)
+  veiculo_marca     String? @db.VarChar(50)
+  veiculo_ano       Int?
+  veiculo_chasi     String? @db.VarChar(50)
+  veiculo_status    Int?
+}
+
+model voo {
+  voo_id      Int    @id @default(autoincrement())
+  voo_numero  String @default("0") @db.VarChar(50)
+  voo_origem  String @default("0") @db.VarChar(100)
+  voo_destino String @default("0") @db.VarChar(100)
+  voo_status  Int    @default(0)
+}
